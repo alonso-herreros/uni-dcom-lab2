@@ -8,6 +8,10 @@
 %
 %-------------------------------------------------------------------------
 
+%-------------------------------------------------------------------------
+% LAB SECTION 1
+%-------------------------------------------------------------------------
+
 %% -- Init
 
 set(groot,'defaulttextinterpreter','latex');
@@ -20,7 +24,7 @@ function E = energy(x)
     E = sum(abs(x).^2);
 end
 
-%% Experiment runs
+%% Experiment sequences
 
 % == Run experiment ==
 function [Ep, corr, BERs, SERs] = run(exp, variances)
@@ -64,8 +68,7 @@ function [BER, SER] = exec1(exp, nVar)
 end
 
 
-
-%% 1.0. Init
+%% 1.0. Definitions
 
 M = 4;                  % Orden de la constelación (Constellation order)
 nSimb = 2e5;            % Number of symbols in the simulation
@@ -73,13 +76,10 @@ tAssig = 'gray';        % Type of binary assignement ('gray', 'bin')
 a = 9/10;
 d = arrayfun(@(m) a^m, 0:50);
 
-%% 1. One user
-
-disp(['d[n]: ', num2str(d)]);
-
-% 1.1. Energy of d[m]
+%% 1.1. Energy of d[m]
 
 E = energy(d);
+disp(['d[n]: ', num2str(d)]);
 disp(['Energy of d[m]: ', num2str(E)]);
 disp(' ');
 
@@ -96,8 +96,7 @@ exp = Experiment1(M, nSimb, tAssig, d, x0);
 
 % 1.2.2. Using sequences x1-x3
 
-load('sequences11.mat');
-x = sequences11;
+load('sequences11.mat'); x = sequences11;
 
 for i=1:size(x,1)
     exp = Experiment1(M, nSimb, tAssig, d, x(i,:));
